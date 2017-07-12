@@ -1,0 +1,57 @@
+Player
+
+{
+	name: String,
+	id: String,
+	cards: [Card],
+	teamId: String,
+
+	//Later
+	email: String,
+	password: String // Package to store securely?
+}
+
+Team 
+
+{
+	player1Id: String,
+	player2Id: String,
+	Score: Integer
+}
+
+Game //Put this in the URL
+
+{
+	team1Id: String,
+	team2Id: String,
+	activePlayerId: String,
+	dealerId: String
+}
+
+//Just as a schema of the cards object on the Player
+Card
+
+{
+	Suit: String, SCHD
+	value: Integer 23456789 10 11 12 13 14
+}
+
+Trump suit is a global variable
+Dealer is global variable
+
+
+Server-side methods
+
+- getCards
+- shuffleAndDeal
+- playCard
+- getScore
+- makeBet
+- startGame
+
+Other Logic
+- Randomly selecting a dealer
+- Turn order
+- Deciding who wins a hand
+
+

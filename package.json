@@ -1,0 +1,16 @@
+{
+  "name": "west",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Online 4-player team card game. Similar to Bid Whist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Holden McGinnis",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
+}
