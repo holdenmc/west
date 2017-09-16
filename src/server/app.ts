@@ -1,5 +1,4 @@
-const bodyParser = require('body-parser');
-
+import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import router from './api/index';
 import { errorHandler, fourOhFour } from './api/error';
