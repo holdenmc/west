@@ -55,3 +55,13 @@ const resolveBets = () => {
   //Set the betting team and their bet
   //Send message to all about whos turn it is 
 };
+
+// Join the lobby (when 4 people in the game will start)
+const joinLobby = () => {
+
+};
+
+// Sets up the Game document properly
+const initializeGame = () => {
+  
+}
