@@ -22,7 +22,7 @@ Game //Put this in the URL
 Card
 {
 	suit: Number, enum reference
-	value: Number, enum reference
+	rank: Number, enum reference
 }
 
 Trump suit is a round variable
