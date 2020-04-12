@@ -1,27 +1,17 @@
-Player
+User
 
 {
-	name: String,
-	id: String,
-	cards: [Card],
-	teamId: String,
+	name: { first: String, last: String },
+	_id: String,
 
 	//Later
 	email: String,
 	password: String // Package to store securely?
 }
 
-Team 
-
-{
-	player1Id: String,
-	player2Id: String,
-	Score: Integer
-}
-
 Game //Put this in the URL
-
 {
+	_id
 	team1Id: String,
 	team2Id: String,
 	activePlayerId: String,
@@ -30,15 +20,13 @@ Game //Put this in the URL
 
 //Just as a schema of the cards object on the Player
 Card
-
 {
-	Suit: String, SCHD
-	value: Integer 23456789 10 11 12 13 14
+	suit: Number, enum reference
+	value: Number, enum reference
 }
 
-Trump suit is a global variable
-Dealer is global variable
-
+Trump suit is a round variable
+Dealer is a game variable
 
 Server-side methods
 
@@ -55,3 +43,4 @@ Other Logic
 - Deciding who wins a hand
 
 
+In future, maintain lobby, users, etc...
