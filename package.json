@@ -5,7 +5,9 @@
   "scripts": {},
   "private": true,
   "dependencies": {
-    "body-parser": "^1.18.1"
+    "body-parser": "^1.18.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7"
   },
   "devDependencies": {
     "@types/node": "^6.0.88",

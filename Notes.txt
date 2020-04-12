@@ -29,18 +29,27 @@ Trump suit is a round variable
 Dealer is a game variable
 
 Server-side methods
+In Lobby
+- Register new user
+- Login user
+- Create Game - initializes an empty game on the Server
+- List existing games
+- Join Game - joins an existing game if there's an open slot
+- List online users
 
-- getCards
-- shuffleAndDeal
-- playCard
-- getScore
-- makeBet
-- startGame
+In Pregame page
+- Set Teams - set the pairings for the game, before it's started
+- Start Game - begins the game, randomly selecting a starting dealer
 
-Other Logic
+In game
+- Get current game state - i.e. score, how many hands each has one, current player, etc...
+- Make a bet
+- Play a card
+
+Full website
+- few user profile
+
+Other supplementary internal logic
 - Randomly selecting a dealer
 - Turn order
 - Deciding who wins a hand
-
-
-In future, maintain lobby, users, etc...
