@@ -1,38 +1,23 @@
-import { Express, RequestHandler } from 'express';
+import { Express } from 'express';
+import * as UserCtrl from '../controllers/UserCtrl';
 
-const createUser: RequestHandler = (req, res, next) => {
-        
-};
-
-const updateUser: RequestHandler = (req, res, next) => {
-
-};
-
-const listOnlineUsers: RequestHandler = (req, res, next) => {
-    // TODO: Where to track this?
-};
-
-const getUserById: RequestHandler = (req, res, next) => {
-
-};
-
-const getLoggedInUser: RequestHandler = (req, res, next) => {
-
-};
 
 export const register = (app: Express) => {
     // Create a user
-    app.post('/v1/user', createUser);
+    app.post('/v1/user', UserCtrl.createUser);
 
     // Update a user
-    app.put('/v1/user', updateUser);
+    app.put('/v1/user', UserCtrl.updateUser);
 
     // Get a user by id
-    app.get('/v1/user/:id', getUserById);
+    app.get('/v1/user/:id', UserCtrl.getUserById);
 
     // Get the logged in user
-    app.get('/v1/current_user', getLoggedInUser);
+    app.get('/v1/current_user', UserCtrl.getLoggedInUser);
+
+    // Authenticate a user
+    app.get('/v1/login', UserCtrl.login);
 
     // List all online users
-    app.get('/v1/online_users', listOnlineUsers);
+    app.get('/v1/online_users', UserCtrl.listOnlineUsers);
 };

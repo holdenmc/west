@@ -108,4 +108,7 @@ const schema = new mongoose.Schema({
     collection: 'games'
 });
 
+schema.index({ owner: 1 });
+schema.index({ players: 1 });
+
 export const model = mongoose.model<IMongooseGame>(modelName, schema);

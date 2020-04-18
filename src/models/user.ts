@@ -5,6 +5,7 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
+    accessToken: string;
 }
 
 export interface IMongooseUser extends IUser, Document {}
@@ -13,9 +14,16 @@ export interface IMongooseUserModel extends Model<IMongooseUser> {}
 const modelName = 'User';
 
 const schema = new mongoose.Schema({
-    name: String,
-    email: String,
+    name: {
+        type: String,
+        unique: true,
+    },
+    email: {
+        type: String,
+        unique: true,
+    },
     password: String, // TODO: hash this
+    accessToken: String,
 }, {
     collection: 'users'
 });
