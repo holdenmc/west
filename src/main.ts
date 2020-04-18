@@ -1,6 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socket from 'socket.io';
+import bodyParser from 'body-parser';
 
 import { init } from './connection';
 import { register as registerUserRoutes } from './routes/user';
@@ -14,6 +15,8 @@ const app = express();
 const port = 3000;
 const server = http.createServer(app);
 const io = socket(server);
+
+app.use(bodyParser.json());
 
 registerUserRoutes(app);
 registerGameRoutes(app);

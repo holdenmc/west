@@ -28,4 +28,6 @@ const schema = new mongoose.Schema({
     collection: 'users'
 });
 
+schema.index({ accessToken: 1 });
+
 export const model = mongoose.model<IMongooseUser>(modelName, schema);

@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import { model as User } from '../models/user';
+import crypto from 'crypto';
 
 const ns = '@UserCtrl';
 
@@ -24,10 +25,11 @@ export const createUser: RequestHandler = (req, res, next) => {
         }
 
         // TODO: hash password
-        // TODO: Create access token
-        const user = await User.create({ email, name, password });
+        // TODO: Create access token in a better way
+        const accessToken = crypto.randomBytes(48).toString('hex');
+        await User.create({ email, name, password, accessToken });
 
-        return res.status(200).send({ success: true });
+        return res.status(200).send({ success: true, accessToken });
     })().catch(next);
 };
 
