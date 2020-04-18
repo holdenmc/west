@@ -34,7 +34,6 @@ export interface IGame {
     currentRound?: IRound;
 }
 
-
 export interface IMongooseGame extends IGame, Document {}
 export interface IMongooseGameModel extends Model<IMongooseGame> {}
 
