@@ -10,7 +10,7 @@ export const isLoggedIn = (req, res, next) => {
     }
 
     (async () => {
-        const user = await User.findOne({ accessToken: req.body.accessToken });
+        const user = await User.findOne({ accessToken: req.body.accessToken }).lean();
 
         if (!user) {
             console.log(logCtx, 'unauthorized request');
