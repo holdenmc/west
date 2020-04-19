@@ -80,8 +80,8 @@ export const updateUser: RequestHandler = (req, res, next) => {
         // TODO: Validate inputs
         // TODO: hash password
         // TODO: Check that name and email don't exist elsewhere
-        await User.update({ _id: req.params.id }, { 
-            $set: {  
+        await User.update({ _id: req.params.id }, {
+            $set: {
                 name: req.body.name,
                 password: req.body.password,
                 email: req.body.email,
@@ -119,4 +119,25 @@ export const getLoggedInUser: RequestHandler = (req, res, next) => {
 
 export const login: RequestHandler = (req, res, next) => {
     const logCtx = `${ns}.login`;
+
+    (async () => {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.sendStatus(400);
+        }
+
+        const user = await User.findOne({ name: username });
+
+        if (!user) {
+            return res.sendStatus(401);
+        }
+
+        // TODO Update password equality once we're hashing
+        if (user.password !== password) {
+            return res.sendStatus(401);
+        }
+
+        return res.status(200).send({ accessToken: user.accessToken });
+    })().catch(next);
 };
