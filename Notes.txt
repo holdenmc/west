@@ -30,8 +30,8 @@ Dealer is a game variable
 
 Server-side methods
 In Lobby
-- Register new user
-- Login user
+- Register new user DONE
+- Login user DONE
 - Create Game - initializes an empty game on the Server
 - List existing games
 - Join Game - joins an existing game if there's an open slot
@@ -47,7 +47,8 @@ In game
 - Play a card
 
 Full website
-- few user profile
+- view user profile
+	- Added Update
 
 Other supplementary internal logic
 - Randomly selecting a dealer

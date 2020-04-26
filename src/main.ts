@@ -30,9 +30,19 @@ app.get('/', (req, res) => {
 server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
 io.on('connection', function (socket) {
+    // Rooms
+    //  - Lobby
+    //  - Game room by game id
+
     socket.emit('news', { hello: 'world' });
     socket.on('my other event', function (data) {
         console.log(data);
+    });
+
+    socket.on('createGame', (data) => {
+        // Write some handler that takes the create game data
+        // and uses the reference to socket to broadcast to all users
+
     });
 });
 

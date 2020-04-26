@@ -7,20 +7,36 @@ const ns = '@UserCtrl';
 
 // TODO: Validate inputs via regex
 const validateName = (name: string): boolean => {
-    return true;
+    const nameRegex = /asdfasdf/;
+    return nameRegex.test(name);
 };
 
 const validatePassword = (password: string): boolean => {
-    return true;
+    const passwordRegex = /foooo/;
+    return passwordRegex.test(password) && password.length > 8;
 };
 
 const validateEmail = (email: string): boolean => {
-    return true;
+    const emailRegex = /foo/;
+    return emailRegex.test(email);
 };
 
 const getUserSafeFields = (user: IUser): Partial<IUser> => {
     return _.pick(user, 'name', 'email');
 };
+
+const ensureUniqueness = async (params: { name?: string; email?: string }) => {
+    const { name, email } = params;
+    let nameCount = 0, emailCount = 0;
+    if (name) {
+        nameCount = await User.countDocuments({ name });
+    }
+    if (email) {
+        emailCount = await User.countDocuments({ email });
+    }
+    return { nameCount, emailCount };
+};
+
 
 export const createUser: RequestHandler = (req, res, next) => {
     const logCtx = `${ns}.createUser`;
@@ -48,11 +64,10 @@ export const createUser: RequestHandler = (req, res, next) => {
         }
 
         // Check if a user with that email or name exists
-        const nameCount = await User.countDocuments({ name });
+        const { nameCount, emailCount } = await ensureUniqueness({ name, email });
         if (nameCount !== 0) {
             return res.status(400).send('User name is taken by another user. Choose another.');
         }
-        const emailCount = await User.countDocuments({ email });
         if (emailCount !== 0) {
             return res.status(400).send('Email is already registered with another user. Please login as that user.');
         }
@@ -71,22 +86,44 @@ export const updateUser: RequestHandler = (req, res, next) => {
 
     const userId = req.params.id;
 
+    // Only allow updates of logged in user
     if (userId !== req.user._id.toString()) {
-        // can't update another user
         return res.sendStatus(401);
     }
 
     (async () => {
-        // TODO: Validate inputs
+        // Only send the new values
+        const { name, password, email } = req.body;
+
+        if (email && !validateEmail(email)) {
+            console.log(logCtx, `invalid email`, { email });
+            return res.status(400).send('Invalid email');
+        }
+
+        if (name && !validateName(name)) {
+            console.log(logCtx, `invalid user name`, { name });
+            return res.status(400).send('Invalid user name');
+        }
+
+        if (password && !validatePassword(password)) {
+            console.log(logCtx, `invalid passowrd`, { password });
+            return res.status(400).send('Invalid password');
+        }
+
+        // Check if a user with that email or name exists
+        const { nameCount, emailCount } = await ensureUniqueness({ name, email });
+        if (nameCount !== 0) {
+            return res.status(400).send('User name is taken by another user. Choose another.');
+        }
+        if (emailCount !== 0) {
+            return res.status(400).send('Email is already registered with another user. Please login as that user.');
+        }
+        const update: any = { $set: {} };
+        name ? update.$set.name = name : null;
+        password ? update.$set.password = password : null;
+        email ? update.$set.email = email : null;
         // TODO: hash password
-        // TODO: Check that name and email don't exist elsewhere
-        await User.update({ _id: req.params.id }, {
-            $set: {
-                name: req.body.name,
-                password: req.body.password,
-                email: req.body.email,
-            }
-        });
+        await User.update({ _id: req.params.id }, update);
 
         return res.sendStatus(200);
     })().catch(next);
@@ -133,7 +170,7 @@ export const login: RequestHandler = (req, res, next) => {
             return res.sendStatus(401);
         }
 
-        // TODO Update password equality once we're hashing
+        // TODO Update password equality check once we're hashing
         if (user.password !== password) {
             return res.sendStatus(401);
         }
