@@ -7,17 +7,16 @@ const ns = '@UserCtrl';
 
 // TODO: Validate inputs via regex
 const validateName = (name: string): boolean => {
-    const nameRegex = /asdfasdf/;
+    const nameRegex = /[a-zA-Z0-9]+/;
     return nameRegex.test(name);
 };
 
 const validatePassword = (password: string): boolean => {
-    const passwordRegex = /foooo/;
-    return passwordRegex.test(password) && password.length > 8;
+    return password.length > 8; // any 8 characters
 };
 
 const validateEmail = (email: string): boolean => {
-    const emailRegex = /foo/;
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return emailRegex.test(email);
 };
 
