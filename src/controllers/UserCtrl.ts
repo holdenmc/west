@@ -5,14 +5,13 @@ import _ from 'lodash';
 
 const ns = '@UserCtrl';
 
-// TODO: Validate inputs via regex
 const validateName = (name: string): boolean => {
     const nameRegex = /[a-zA-Z0-9]+/;
     return nameRegex.test(name);
 };
 
 const validatePassword = (password: string): boolean => {
-    return password.length > 8; // any 8 characters
+    return password.length > 8; // any 8 characters :shrug:
 };
 
 const validateEmail = (email: string): boolean => {

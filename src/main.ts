@@ -29,10 +29,30 @@ app.get('/', (req, res) => {
 
 server.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
 
+// TODO: move this to a new file
 io.on('connection', function (socket) {
     // Rooms
     //  - Lobby
     //  - Game room by game id
+
+    /**
+     * In Lobby
+     * - Sending a message broadcasts it to all
+     * - Creating a game broadcasts it to all users so that it can be updated on their UI
+     * - Logging on, broadcasts that event to add to all users lists of online users
+     */
+
+    /**
+     * In pre game
+     * - Joining sends a broadcast to all players in room
+     * - Updating settings broadcasts to all
+     * - Starting game broadcasts
+     */
+
+    /**
+     * In game
+     * Every action is handled via sockets...
+     */
 
     socket.emit('news', { hello: 'world' });
     socket.on('my other event', function (data) {

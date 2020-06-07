@@ -19,5 +19,5 @@ export const register = (app: Express) => {
     app.get('/v1/login', UserCtrl.login);
 
     // List all online users
-    app.get('/v1/online_users', middlewares.isLoggedIn, UserCtrl.listOnlineUsers);
+    // app.get('/v1/online_users', middlewares.isLoggedIn, UserCtrl.listOnlineUsers);
 };

@@ -4,7 +4,7 @@ import * as middlewares from './middlewares';
 
 export const register = (app: Express) => {
     // Create a game
-    app.post('/v1/games', middlewares.isLoggedIn)
+    app.post('/v1/games', middlewares.isLoggedIn);
 
     // Update game settings (just teams, for now)
 };
